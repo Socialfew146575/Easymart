@@ -4,7 +4,7 @@ import { getProductReviews, getSimilarProducts, getSingleProduct } from '../../r
 import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import Loader from '../layout/Loader/Loader';
-import { useAlert } from 'react-alert'
+
 import toast, { Toaster } from 'react-hot-toast';
 import ErrorPage from '../../images/product-not-found.png'
 import { addToCart } from "../../redux/actions/cartActions"
@@ -14,7 +14,7 @@ import { FaChartBar } from 'react-icons/fa';
 import SimilarProducts from './SimilarProducts';
 const ProductPage = () => {
     const dispatch = useDispatch();
-    const alert = useAlert();
+    
     const { product, loading, error, reviews , similarProducts } = useSelector((state) => state.product);
     const { cart, error: cartError } = useSelector((state) => state.cart);
     const params = useParams();
@@ -38,7 +38,7 @@ const ProductPage = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error);
+            toast.error(error);
         }
 
         dispatch(getSingleProduct(params.id));
@@ -48,7 +48,7 @@ const ProductPage = () => {
             dispatch(getSimilarProducts(product.category))
         }
 
-    }, [dispatch, params.id, error, alert]);
+    }, [dispatch, params.id, error, toast]);
 
     useEffect(() => {
         if (product && product.reviews) {

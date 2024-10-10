@@ -6,19 +6,19 @@ import MetaData from '../layout/MetaData';
 import { getAllProducts } from '../../redux/actions/productActions';
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../layout/Loader/Loader';
-
-import { useAlert } from 'react-alert';
+import toast, { Toaster } from 'react-hot-toast';
 import { CLEAR_ALL_ERROR } from '../../redux/slices/productSlice';
 import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import Landing from './Landing';
 
 
+
 const Home = () => {
 
     const containerRef = useRef(null)
 
-    const alert = useAlert()
+
     const dispatch = useDispatch();
     const { products, loading, error, productsCount } = useSelector((state) => state.product)
 
@@ -31,13 +31,13 @@ const Home = () => {
     useEffect(() => {
 
         if (error) {
-            alert.error(error)
+            toast.error(error)
 
         }
 
         dispatch(getAllProducts())
 
-    }, [dispatch, error, alert])
+    }, [dispatch, error, toast])
 
 
     if (loading) {
@@ -65,7 +65,7 @@ const Home = () => {
                 }
 
             </div>
-
+                <Toaster/>
         </>
     )
 }

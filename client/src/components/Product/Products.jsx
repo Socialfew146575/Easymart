@@ -8,14 +8,15 @@ import NoProduct from "../../images/product-not-found.png";
 import { IoSearch } from "react-icons/io5";
 import Search from './Search';
 import Loader from '../layout/Loader/Loader';
-import { useAlert } from 'react-alert';
+
+import toast, { Toaster } from 'react-hot-toast';
 import { useSearchParams } from 'react-router-dom';
 
 const Products = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const { products, loading, error, productsCount, filteredProductsCount, resultPerPage } = useSelector((state) => state.product);
-  const alert = useAlert();
+
   const totalPages = Math.ceil(filteredProductsCount / resultPerPage);
   const [showFilters, setShowFilters] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -24,11 +25,11 @@ const Products = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
     }
     dispatch(getAllProducts(keyword, currentPage, filters.category, filters.priceRange, filters.rating));
     window.scrollTo(0, 0);
-  }, [dispatch, currentPage, keyword, filters, error, alert]);
+  }, [dispatch, currentPage, keyword, filters, error, toast]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -120,6 +121,7 @@ const Products = () => {
           </div>
         </div>
       </div>
+      <Toaster/>
     </div>
   );
 };
