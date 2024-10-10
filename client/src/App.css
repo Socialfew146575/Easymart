@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.banner::after {
+  content: "";
+  width: 100vw;
+  height: 100vmin;
+  max-width: 100%;
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  clip-path: polygon(100% 72%, 0% 100%, 100% 100%);
+}
+
+.menuBurger {
+  height: 3.5vmax !important;
+}
+
+.shadow-right-bottom:hover {
+  box-shadow: 0 0 5px rgba(15, 15, 15, 0.26);
+  transform: translateY(-1vmax);
+}
+
+.loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.loader {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  background: #007bff; /* Changed to a blue color */
+  transform: rotateX(65deg) rotate(45deg);
+  color: rgba(173, 216, 230, 0.7);
+  animation: layers1 1s linear infinite alternate;
+}
+
+.loader:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(173, 216, 230, 0.7); /* Light blue overlay */
+  animation: layerTr 1s linear infinite alternate;
+}
+
+@keyframes layers1 {
+  0% {
+    box-shadow: 0px 0px 0 0px;
+  }
+  90%,
+  100% {
+    box-shadow: 20px 20px 0 -4px;
+  }
+}
+
+@keyframes layerTr {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-25px, -25px) scale(1);
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Hide the default radio button */
+.custom-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-clip: content-box;
+  border: solid 2px #316afb;
+  border-radius: 5px; /* Remove rounded corners */
+  background-color: white;
+  margin-right: 8px;
+  cursor: pointer;
+}
+/* Hide the default radio button */
+.custom-radio {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-clip: content-box;
+  border: solid 2px gray;
+  border-radius: 4px; /* Slightly rounded corners */
+  background-color: white;
+  margin-right: 8px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Style the checked state */
+.custom-radio:checked {
+  background-color: #316afb; /* Lighter orange color */
+  /* border-color: #E03C31; */
+  border: none;
+}
+
+.custom-radio:focus {
+  outline: none;
+}
+
+/* Add the check sign */
+.custom-radio:checked::before {
+  content: "✓";
+  color: rgba(255, 255, 255, 1) !important;
+  font-size: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  line-height: 1;
+}
+
+/* Optional: Hover effect */
+.custom-radio:hover {
+  border-color: #ffa07a;
+}
+
+input {
+  @apply focus:outline-none;
+}
+
+textarea {
+  @apply focus:outline-none resize-none;
+}
