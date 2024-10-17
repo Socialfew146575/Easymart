@@ -4,7 +4,7 @@ import imac from "../../images/imac.png"
 import ipad from "../../images/ipad.png"
 import iphone from "../../images/iphone1.png"
 import { Link } from "react-router-dom";
-function PromoProducts() {
+function About() {
     return (
         <section className="py-20 bg-[#E7ECEE]" id="explore">
             {/* Products */}
@@ -119,4 +119,4 @@ function PromoProducts() {
     );
 }
 
-export default PromoProducts;
+export default About;
