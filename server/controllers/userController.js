@@ -52,10 +52,13 @@ const loginUser = asyncErrorHandler(async (req, res, next) => {
 //Logout
 
 const logoutUser = asyncErrorHandler(async (req, res, next) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-    httpOnly: true,
-  });
+ res.cookie("token", null, {
+    expires: new Date(Date.now()), // Immediately expire the cookie
+    httpOnly: true,                // Prevents JavaScript access to the cookie
+    secure: true,                  // Ensures the cookie is sent over HTTPS only
+    sameSite: "None",            // Prevents CSRF attacks by restricting cookie sending
+});
+
 
   return res.status(200).json({ success: true, message: "Logged Out" });
 });
