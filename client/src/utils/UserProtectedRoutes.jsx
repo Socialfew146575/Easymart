@@ -8,6 +8,10 @@ const UserProtectedRoutes = ({ children }) => {
     const location = useLocation();
 
     useEffect(() => {
+        console.log("Loading:", loading); // Log loading state
+        console.log("Is Authenticated:", isAuthenticated); // Log authentication state
+        console.log("Current Location:", location.pathname); // Log the current path
+
         if (!loading) {
             if (!isAuthenticated) {
                 // Store the current path the user was trying to access
