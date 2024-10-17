@@ -9,8 +9,8 @@ const OrderItemsAccordion = () => {
     const [showAccordion, setShowAccordion] = useState(false);
 
     // Debugging: Ensure order and orderItems are correctly defined
-    console.log('Order:', order);
-    console.log('Order Items:', order ? order.orderItems : []);
+    // console.log('Order:', order);
+    // console.log('Order Items:', order ? order.orderItems : []);
 
     if (!order) return null; // Avoid rendering if order is undefined
 
@@ -40,7 +40,7 @@ const OrderItemsAccordion = () => {
 
 const OrderCard = ({ item }) => {
     // Debugging: Ensure item has the expected properties
-    console.log('Order Item:', item);
+    // console.log('Order Item:', item);
 
     if (!item) return null; // Avoid rendering if item is undefined
 
@@ -60,7 +60,7 @@ const OrderCard = ({ item }) => {
                             </p>
                         </div>
                         <div className='flex md:flex-row flex-col gap-4 mt-4 justify-between w-full'>
-                            <Link to={`/products/${item._id}`} className='px-4 order-last md:order-first w-fit py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg text-sm'>View Product</Link>
+                            <Link to={`/product/${item.product}`} className='px-4 order-last md:order-first w-fit py-2 bg-white text-blue-600 border-2 border-blue-600 rounded-lg text-sm'>View Product</Link>
                             <div className='flex gap-6 items-center'>
                                 <p className='text-gray-500 font-medium text-xs border-[1px] p-1 px-3 rounded-md'>{item.quantity} x ${item.price}</p>
                                 <p className='text-black font-medium text-xs'>${item.quantity * item.price}</p>

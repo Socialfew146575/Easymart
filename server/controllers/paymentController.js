@@ -22,7 +22,7 @@ module.exports.processPayment = asyncErrorHandler(async (req,res,next)=>{
 
 module.exports.getStripeApiKey = asyncErrorHandler((req,res,next)=>{
 
-    console.log(req.user)
+    // console.log(req.user)
     res.status(200).json({ stripeApiKey: process.env.STRIPE_API_KEY });
 
 })

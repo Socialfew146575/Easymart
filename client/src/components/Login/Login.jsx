@@ -35,7 +35,7 @@ const Login = () => {
     }, [error, isAuthenticated, navigate, toast]);
 
 
-    console.log(user)
+    // console.log(user)
 
 
     const handleLogin = (e) => {

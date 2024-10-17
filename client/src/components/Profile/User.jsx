@@ -22,7 +22,7 @@ const User = () => {
         }
     }, [user]);
 
-    console.log(error)
+    // console.log(error)
 
     useEffect(() => {
         if (error) {
@@ -46,7 +46,7 @@ const User = () => {
     const handleLastNameChange = (e) => {
         setLastName(e.target.value);
     };
-    console.log(user?.avatar.url)
+    // console.log(user?.avatar.url)
     return (
         <div className='px-2 md:px-4 flex flex-col gap-4 bg-white py-4 rounded-lg'>
             <div className='flex flex-col gap-4'>

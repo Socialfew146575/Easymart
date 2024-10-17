@@ -40,7 +40,7 @@ const newOrder = asyncErrorHandler(async (req, res, next) => {
 
 const getSingleOrder = asyncErrorHandler(async (req, res, next) => {
   const id = req.params.id;
-  console.log(id)
+  // console.log(id)
   const order = await Order.findById({ _id : id, user: req.user.id });
 
   if (!order) {

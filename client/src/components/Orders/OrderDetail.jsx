@@ -29,7 +29,7 @@ const OrderDetail = () => {
 
     }, [id])
 
-    console.log(order , error , loading)
+    // console.log(order , error , loading)
 
     if(!order) return null;
 
@@ -50,7 +50,7 @@ const OrderDetail = () => {
         return new Intl.DateTimeFormat('en-US', options).format(date);
     };
 
-    console.log(order)
+    // console.log(order)
     return (
         <div className='py-4 px-4 md:px-8'>
 

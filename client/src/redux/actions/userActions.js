@@ -31,14 +31,29 @@ import Cookies from "js-cookie";
 
 const route = process.env.REACT_APP_API_URL;
 
+const cookieOptions = {
+  expires: 1, // Cookie expires in 1 day
+  sameSite: "None", // Allows cross-site cookies
+  secure: process.env.NODE_ENV === "production", // Set to true in production for HTTPS
+};
+
+// Login User
 export const login = (email, password) => async (dispatch) => {
   dispatch(LOGIN_REQUEST());
 
   try {
-    const { data } = await axios.post(`${route}/login`, { email, password });
+    const { data } = await axios.post(
+      `${route}/login`,
+      { email, password },
+      { withCredentials: true } // Include credentials
+    );
     const { token, user } = data;
 
-    Cookies.set("token", token, { expires: 1 });
+    // console.log(token);
+    Cookies.set("token", token, cookieOptions);
+
+    // console.log("Cookie", Cookies.get("token"));
+
     dispatch(LOGIN_SUCCESS(user));
   } catch (error) {
     const errorMessage =
@@ -47,12 +62,15 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+// Load User
 export const loadUser = () => async (dispatch) => {
   dispatch(LOAD_USER_REQUEST());
 
   try {
-    const { data } = await axios.get(`${route}/me`);
+    const { data } = await axios.get(`${route}/me`, { withCredentials: true }); // Include credentials
     const { user } = data;
+
+    // console.log("user", user);
 
     dispatch(LOAD_USER_SUCCESS(user));
   } catch (error) {
@@ -64,19 +82,22 @@ export const loadUser = () => async (dispatch) => {
   }
 };
 
+// Register User
 export const register =
   ({ firstName, lastName, email, password }) =>
   async (dispatch) => {
     dispatch(REGISTER_REQUEST());
+
     try {
       const name = `${firstName} ${lastName}`;
-      const { data } = await axios.post(`${route}/register`, {
-        name,
-        email,
-        password,
-      });
+      const { data } = await axios.post(
+        `${route}/register`,
+        { name, email, password },
+        { withCredentials: true } // Include credentials
+      );
 
-      Cookies.set("token", data.token);
+      Cookies.set("token", data.token, cookieOptions);
+
       dispatch(REGISTER_SUCCESS(data.user));
     } catch (error) {
       const errorMessage =
@@ -87,11 +108,16 @@ export const register =
     }
   };
 
+// Forgot Password
 export const forgotPassword = (email) => async (dispatch) => {
   dispatch(FORGOT_PASSWORD_REQUEST());
 
   try {
-    const { data } = await axios.post(`${route}/password/forgot`, { email });
+    const { data } = await axios.post(
+      `${route}/password/forgot`,
+      { email },
+      { withCredentials: true } // Include credentials
+    );
     dispatch(FORGOT_PASSWORD_SUCCESS(data.message));
   } catch (error) {
     const errorMessage =
@@ -101,17 +127,20 @@ export const forgotPassword = (email) => async (dispatch) => {
   }
 };
 
+// Reset Password
 export const resetPassword =
   ({ password, token, confirmPassword }) =>
   async (dispatch) => {
     dispatch(RESET_PASSWORD_REQUEST());
 
     try {
-      const { data } = await axios.put(`${route}/password/reset/${token}`, {
-        password,
-        confirmPassword,
-      });
-      Cookies.set("token", data.token);
+      const { data } = await axios.put(
+        `${route}/password/reset/${token}`,
+        { password, confirmPassword },
+        { withCredentials: true } // Include credentials
+      );
+
+      Cookies.set("token", data.token, cookieOptions);
       dispatch(RESET_PASSWORD_SUCCESS(data.user));
     } catch (error) {
       const errorMessage =
@@ -122,6 +151,7 @@ export const resetPassword =
     }
   };
 
+// Update User Details
 export const updateUser =
   ({ firstName, lastName }) =>
   async (dispatch) => {
@@ -129,8 +159,13 @@ export const updateUser =
 
     try {
       const name = `${firstName} ${lastName}`;
-      const { data } = await axios.put(`${route}/me/update`, { name });
-      Cookies.set("token", data.token, { expires: 1 });
+      const { data } = await axios.put(
+        `${route}/me/update`,
+        { name },
+        { withCredentials: true } // Include credentials
+      );
+
+      Cookies.set("token", data.token, cookieOptions);
       dispatch(UPDATE_USER_DETAIL_SUCCESS(data.user));
     } catch (error) {
       const errorMessage =
@@ -141,17 +176,19 @@ export const updateUser =
     }
   };
 
+// Update User Password
 export const updatePassword =
   (oldPassword, newPassword, confirmPassword) => async (dispatch) => {
     dispatch(UPDATE_USER_PASSWORD_REQUEST());
 
     try {
-      const { data } = await axios.put(`${route}/password/update`, {
-        oldPassword,
-        newPassword,
-        confirmPassword,
-      });
-      Cookies.set("token", data.token, { expires: 1 });
+      const { data } = await axios.put(
+        `${route}/password/update`,
+        { oldPassword, newPassword, confirmPassword },
+        { withCredentials: true } // Include credentials
+      );
+
+      Cookies.set("token", data.token, cookieOptions);
       dispatch(
         UPDATE_USER_PASSWORD_SUCCESS({
           user: data.user,
@@ -166,11 +203,14 @@ export const updatePassword =
     }
   };
 
+// Logout User
 export const logout = () => async (dispatch) => {
   dispatch(LOGOUT_USER_REQUEST());
 
   try {
-    const { data } = await axios.get(`${route}/logout`);
+    const { data } = await axios.get(`${route}/logout`, {
+      withCredentials: true,
+    }); // Include credentials
     Cookies.remove("token");
     dispatch(LOGOUT_USER_SUCCESS(data.message));
   } catch (error) {

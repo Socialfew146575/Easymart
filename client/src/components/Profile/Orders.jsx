@@ -48,7 +48,7 @@ const Orders = () => {
 
 const OrderCard = ({ order }) => {
 
-  console.log(order)
+  // console.log(order)
 
   const formatDate = (isoDateString) => {
     const date = new Date(isoDateString);
@@ -68,7 +68,7 @@ const OrderCard = ({ order }) => {
   };
 
 
-  console.log("orders", order)
+  // console.log("orders", order)
   return (
 
     <div className="  flex flex-col rounded-t-lg overflow-hidden border-2 border-gray-200 mb-4 bg-white">

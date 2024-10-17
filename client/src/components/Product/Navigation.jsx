@@ -2,7 +2,7 @@ import React from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardDoubleArrowLeft, MdKeyboardArrowRight, MdKeyboardDoubleArrowRight } from "react-icons/md";
 
 const Navigation = ({ currentPage, totalPages, handlePageChange }) => {
-    console.log(currentPage, totalPages);
+    // console.log(currentPage, totalPages);
 
     const isFirstPage = currentPage === 1;
     const isLastPage = currentPage === totalPages;

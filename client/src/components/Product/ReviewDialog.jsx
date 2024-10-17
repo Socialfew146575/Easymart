@@ -5,8 +5,8 @@ const ReviewDialog = ({ onClose }) => {
     const [rating,setRating] = useState(0)
     const handleSubmit = () => {
         // Handle the submit logic here, e.g., dispatch an action or call an API
-        console.log("Review Submitted: ", reviewText);
-        console.log("Rating",rating)
+        // console.log("Review Submitted: ", reviewText);
+        // console.log("Rating",rating)
         onClose(); // Close the dialog after submission
     };
 

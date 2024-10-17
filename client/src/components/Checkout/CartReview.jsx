@@ -156,7 +156,7 @@ const ShippingSummaryCard = () => {
             0
         );
 
-        console.log(newSubtotal)
+        // console.log(newSubtotal)
 
         // Calculate the shipping charges
         const newShippingCharges = newSubtotal > 1000 ? 0 : 200;

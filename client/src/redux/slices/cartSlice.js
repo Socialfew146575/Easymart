@@ -81,7 +81,7 @@ const cartSlice = createSlice({
       const existingItem = state.cart.find(
         (item) => item.product._id === product._id
       );
-      console.log(existingItem);
+      // console.log(existingItem);
       state.error = null; // Reset error
       if (existingItem) {
         existingItem.quantity += quantity;
@@ -93,9 +93,9 @@ const cartSlice = createSlice({
     },
     REMOVE_FROM_CART: (state, action) => {
       const { id } = action.payload;
-      console.log(id);
+      // console.log(id);
       const itemIndex = findItemIndex(state, id);
-      console.log(itemIndex);
+      // console.log(itemIndex);
       if (itemIndex !== -1) {
         state.cart.splice(itemIndex, 1);
         state.cartItemsCount -= 1;
