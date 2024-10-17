@@ -29,8 +29,8 @@ export const getAllProducts =
     try {
       dispatch(ALL_PRODUCT_REQUEST());
 
-      console.log("keyword",keyword);
-      console.log("category", category);
+      // console.log("keyword",keyword);
+      // console.log("category", category);
       
       let link = `${route}/products?page=${currentPage}&keyword=${keyword}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte] = ${rating}`;
 
@@ -38,7 +38,9 @@ export const getAllProducts =
         link = `${route}/products?page=${currentPage}&keyword=${keyword}&category=${category}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte] = ${rating}`;
       }
 
-      const { data } = await axios.get(link);
+      const { data } = await axios.get(link, {
+        withCredentials: true,
+      });
     
       dispatch(
         ALL_PRODUCT_SUCCESS({
@@ -64,7 +66,9 @@ export const getSingleProduct = (id) => async (dispatch) => {
   try {
     dispatch(SINGLE_PRODUCT_REQUEST());
 
-    const { data } = await axios.get(`${route}/product/${id}`);
+    const { data } = await axios.get(`${route}/product/${id}`, {
+      withCredentials: true,
+    });
 
     dispatch(SINGLE_PRODUCT_SUCCESS(data.product));
   } catch (error) {
@@ -84,7 +88,9 @@ export const getProductReviews = (id) => async (dispatch) => {
   try {
     dispatch(GET_PRODUCT_REVIEWS_REQUEST()); // Dispatch request action
 
-    const { data } = await axios.get(`${route}/reviews?id=${id}`); // Append id as a query param
+    const { data } = await axios.get(`${route}/reviews?id=${id}`, {
+      withCredentials: true,
+    }); // Append id as a query param
 
     dispatch(GET_PRODUCT_REVIEWS_SUCCESS(data.reviews)); // Dispatch success action with data
   } catch (error) {
@@ -115,7 +121,9 @@ export const getSimilarProducts = (category) => async(dispatch)=>{
        const link = `${route}/products?page=${currentPage}&keyword=${keyword}&category=${category}&price[gte]=${priceRange[0]}&price[lte]=${priceRange[1]}&ratings[gte] = ${rating}`;
      
 
-     const { data } = await axios.get(link);
+     const { data } = await axios.get(link, {
+       withCredentials: true,
+     });
 
      dispatch(
        SIMILAR_PRODUCT_SUCCESS({

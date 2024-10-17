@@ -2,15 +2,13 @@ require("dotenv").config({ path: "./config/config.env" });
 const express = require("express");
 const app = express();
 const cors = require("cors")
-const cookie_parser = require('cookie-parser')
+const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser")
 const corsOptions = {
-  origin: [
-    process.env.DEPLOYED_FRONTEND_URL || "http://localhost:3000", // Fallback for development
-    process.env.LOCAL_FRONTEND_URL || "http://localhost:3000", // Fallback for local
-  ],
-  methods: ["GET", "POST"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: process.env.DEPLOYED_FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE"], // Specify the allowed HTTP methods
+  allowedHeaders: ["Content-Type", "Authorization"], // Specify the allowed headers
+  credentials: true, // Enable credentials (cookies, authorization headers, etc)
 };
 
 app.use(cors(corsOptions));
@@ -18,8 +16,13 @@ app.use(cors(corsOptions));
 const errorMiddleware = require("./middleware/error");
 
 app.use(express.json());
-app.use(cookie_parser());
+app.use(cookieParser());
 app.use(bodyParser.json()); 
+// app.use((req, res, next) => {
+//   console.log("Headers:", req.headers);
+//   console.log("Cookies:", req.cookies);
+//   next();
+// });
 app.use(bodyParser.urlencoded({ extended: true }));
 // Product Route
 const productRouter = require("./routes/productRoute");

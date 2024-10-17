@@ -5,7 +5,7 @@ import { addShipingInfo } from "../../redux/actions/cartActions";
 const ShippingAddress = () => {
 
     const { shippingInfo , confirmedOrder  } = useSelector((state) => state.cart);
-    console.log(shippingInfo)
+    // console.log(shippingInfo)
     const [formValues, setFormValues] = useState(shippingInfo);
 
     const navigate = useNavigate()
@@ -194,7 +194,7 @@ const ShippingSummaryCard = ({ formValues }) => {
 
     const handleSaveClick = () => {
         dispatch(addShipingInfo(formValues)); // Dispatch the action
-        console.log("CLICKED");
+        // console.log("CLICKED");
         navigate('/checkout-details?tab=review'); // Navigate immediately
     };
 

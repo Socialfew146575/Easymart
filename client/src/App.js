@@ -32,10 +32,13 @@ const App = () => {
 
   const getStripeApiKey = useCallback(async () => {
     try {
-      const { data } = await axios.get("/api/v1/stripeapikey");
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/stripeapikey`,
+        { withCredentials: true }
+      );
       setStripeApiKey(data.stripeApiKey);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   }, []);
 

@@ -17,7 +17,9 @@ export const getUserOrders = () => async (dispatch) => {
   dispatch(GET_USER_ORDERS_LOADING());
 
   try {
-    const { data } = await axios.get(`${route}/orders/me`);
+    const { data } = await axios.get(`${route}/orders/me`, {
+      withCredentials: true,
+    });
 
     dispatch(GET_USER_ORDERS_SUCCESS(data.orders));
   } catch (error) {
@@ -35,8 +37,10 @@ export const getUserOrder = (id) => async (dispatch) => {
   dispatch(GET_USER_ORDER_LOADING());
 
   try {
-    const { data } = await axios.get(`${route}/order/${id}`);
-    console.log(data)
+    const { data } = await axios.get(`${route}/order/${id}`, {
+      withCredentials: true,
+    });
+    // console.log(data)
     dispatch(GET_USER_ORDER_SUCCESS(data.order));
   } catch (error) {
     dispatch(
@@ -61,26 +65,32 @@ export const createUserOrder =
   async (dispatch) => {
     dispatch(CREATE_USER_ORDER_REQUEST());
 
-    console.log(
-      shippingInfo,
-      orderItems,
-      paymentInfo,
-      itemsPrice,
-      taxPrice,
-      shippingPrice,
-      totalPrice
-    );
+    // console.log(
+    //   shippingInfo,
+    //   orderItems,
+    //   paymentInfo,
+    //   itemsPrice,
+    //   taxPrice,
+    //   shippingPrice,
+    //   totalPrice
+    // );
 
     try {
-      const { data } = await axios.post(`${route}/order/new`, {
-        shippingInfo,
-        orderItems,
-        paymentInfo,
-        itemsPrice,
-        taxPrice,
-        shippingPrice,
-        totalPrice,
-      });
+      const { data } = await axios.post(
+        `${route}/order/new`,
+        {
+          shippingInfo,
+          orderItems,
+          paymentInfo,
+          itemsPrice,
+          taxPrice,
+          shippingPrice,
+          totalPrice,
+        },
+        {
+          withCredentials: true,
+        }
+      );
 
       dispatch(CREATE_USER_ORDER_SUCCESS(data.order));
 

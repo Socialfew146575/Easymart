@@ -24,13 +24,13 @@ const Payment = () => {
 
     const { shippingInfo, confirmedOrder, cart } = useSelector((state) => state.cart);
     const { user } = useSelector((state) => state.user);
-    const {  error: orderError , message , order : newOrder } = useSelector((state) => state.order);
+    const { error: orderError, message, order: newOrder } = useSelector((state) => state.order);
 
-  
+
 
     const orderInfo = JSON.parse(sessionStorage.getItem('easymart_order_info')) || {};
 
-   
+
 
     // Handle successful order creation
     const [timer, setTimer] = useState(5);
@@ -38,7 +38,7 @@ const Payment = () => {
     useEffect(() => {
         if (message === "Your order has been placed successfully!") {
             setSucceeded(true);
-           
+
             toast.success(message);
             setTimer(5);
 
@@ -62,13 +62,13 @@ const Payment = () => {
             name: item.product.name,
             description: item.product.description,
             quantity: item.quantity,
-            image: item.product.images[0].url, 
+            image: item.product.images[0].url,
             product: item.product._id,
             price: item.product.price
         };
     });
 
-    console.log(orderItems);
+    // console.log(orderItems);
 
 
     const order = {
@@ -133,8 +133,11 @@ const Payment = () => {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                withCredentials: true, // Move this inside the config object
             };
-            const { data } = await axios.post("/api/v1/payment/process", paymentData, config);
+
+            const { data } = await axios.post("http://localhost:8000/api/v1/payment/process", paymentData, config);
+
 
             const client_secret = data.client_secret;
 
@@ -234,14 +237,14 @@ const Payment = () => {
                         {error && <div className="text-red-500 text-sm">{error}</div>}
                         {succeeded ? (
                             <>
-                            <div className="text-green-500 text-sm">Payment Successful!</div>
-                             
-                                <ConfettiExplosion/>
+                                <div className="text-green-500 text-sm">Payment Successful!</div>
+
+                                <ConfettiExplosion />
 
                                 <div className="text-[#1557f4] text-sm">Redirecting to Order Details in {timer} second.</div>
-                                
+
                             </>
-                            
+
                         ) : (
                             <button
                                 type="submit"

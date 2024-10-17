@@ -11,7 +11,7 @@ export const addToCart = (product, quantity) => (dispatch) => {
 };
 
 export const removeFromCart = (id) => (dispatch) => {
-  console.log("id", id);
+  // console.log("id", id);
   dispatch(REMOVE_FROM_CART({ id }));
 };
 

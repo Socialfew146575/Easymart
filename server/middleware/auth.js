@@ -3,17 +3,18 @@ const { asyncErrorHandler } = require("./asyncErrorHandler");
 const User = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 
+// Middleware
 const isAuthenticatedUser = asyncErrorHandler(async (req, res, next) => {
-  const { token } = req.cookies;
+
+
+  const  token  = req.cookies.token;
 
   if (!token) {
     return next(new ErrorHandler("Please Login to access this resource", 401));
   }
 
   const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-
   req.user = await User.findById(decodedToken.id);
-
   next();
 });
 
